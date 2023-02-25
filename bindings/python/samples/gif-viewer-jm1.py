@@ -51,10 +51,11 @@ try:
     # Infinitely loop through the gif
     cur_frame = 0
     while(True):
-        matrix.SwapOnVSync(canvases[cur_frame], framerate_fraction=10)
-	if cur_frame == num_frames - 1:
-            cur_frame = 0
-        else:
-            cur_frame += 1
+        #matrix.SwapOnVSync(canvases[cur_frame], framerate_fraction=10)
+        matrix.SwapOnVSync(canvases[cur_frame])
+#	if cur_frame == num_frames - 1:
+#            cur_frame = 0
+#        else:
+#            cur_frame += 1
 except KeyboardInterrupt:
     sys.exit(0)
