@@ -5,12 +5,19 @@ import sys
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
 
-if len(sys.argv) < 2:
-    sys.exit("Require an image argument")
-else:
-    image_file = sys.argv[1]
+#if len(sys.argv) < 2:
+#    sys.exit("Require an image argument")
+#    image_file = "../nhl_matrix/nhl_logos/logo_8.gif"
+#else:
+#    image_file = sys.argv[1]
 
-image = Image.open(image_file)
+#image = Image.open(image_file)
+
+home_img_path = "../nhl_matrix/nhl_logos/logo_8.gif"
+away_img_path = "../nhl_matrix/nhl_logos/logo_2.gif"
+
+home_logo = Image.open(home_img_path)
+away_logo = Image.open(away_img_path)
 
 # Configuration for the matrix
 options = RGBMatrixOptions()
@@ -24,9 +31,13 @@ matrix = RGBMatrix(options = options)
 
 # Make image fit our screen.
 #image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
-image.thumbnail((matrix.width/2.2, matrix.height/2.2), Image.ANTIALIAS)
+home_logo.thumbnail((matrix.width/2.2, matrix.height/2.2), Image.ANTIALIAS)
+away_logo.thumbnail((matrix.width/2.2, matrix.height/2.2), Image.ANTIALIAS)
 
-matrix.SetImage(image.convert('RGB'))
+matrix.SetImage(home_logo.convert('RGB'), 1, 1)
+matrix.SetImage(away_logo.convert('RGB'), 1 + home_logo.width + 4, 1)
+
+
 
 try:
     print("Press CTRL-C to stop.")
