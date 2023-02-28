@@ -29,7 +29,6 @@ options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
 
 matrix = RGBMatrix(options = options)
-
 # RGB example w/graphics prims.
 # Note, only "RGB" mode is supported currently.
 image = Image.new("RGB", (32, 32))  # Can be larger than matrix if wanted!!
