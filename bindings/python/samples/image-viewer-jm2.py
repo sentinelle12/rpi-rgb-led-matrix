@@ -7,10 +7,10 @@ from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
 
 class Logo(Image):
-    def __init__(self, image_file, thmbn_width, thmbn_height):
+    def __init__(self, image_file):
         super(Logo, self).__init__()
-        self.image = Image.open(image_file)
-        self.image.thumbnail((thmbn_width, thmbn_height), Image.ANTIALIAS)
+        self.img = Image.open(image_file)
+        self.img.thumbnail((img_width/2, img_height/2), Image.ANTIALIAS)
 
 class Matrix(SampleBase):
     def __init__(self):
