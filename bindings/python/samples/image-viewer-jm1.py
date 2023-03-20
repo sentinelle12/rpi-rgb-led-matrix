@@ -13,7 +13,7 @@ from PIL import Image
 
 #image = Image.open(image_file)
 
-home_img_path = "../nhl_matrix/nhl_logos/logo_8.gif"
+home_img_path = "../nhl_matrix/nhl_logos/sources/logo_8.gif"
 away_img_path = "../nhl_matrix/nhl_logos/logo_2.gif"
 
 home_logo = Image.open(home_img_path)

@@ -31,7 +31,7 @@ try:
     print("Press CTRL-C to stop.")
     while True:
         matrix = Matrix()
-        home_logo = Logo('../nhl_matrix/nhl_logos/logo_8.gif')
+        home_logo = Logo('../nhl_matrix/nhl_logos/sources/logo_8.gif')
         away_logo = Logo('../nhl_matrix/nhl_logos/logo_2.gif')
 
         matrix.display_image(10, 5)
