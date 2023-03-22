@@ -1,21 +1,17 @@
 #!/usr/bin/env python
 
-from nhl_scoreboard_data_manager import GameData
+# from nhl_scoreboard_data_manager import GameData
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
+from samplebase import SampleBase
 from PIL import Image
 import time
 import sys
 
 
-class NhlLedMatrix:
-    def __init__(self, master):
-        self.master = master(options=self.options)
-        self.options = RGBMatrixOptions()
-        self.options.rows = 64
-        self.options.cols = 64
-        self.options.chain_length = 1
-        self.options.parallel = 1
-        self.options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
+class HockeyScoreboard(SampleBase):
+    def __init__(self, *args, **kwargs):
+        super(HockeyScoreboard, self).__init__(*args, **kwargs)
+#        self.parser.add_argument("-t", "--text", help="The text to scroll on the RGB LED panel", default=my_date)
 
         # self.game_data = GameData()
         # self.is_there_a_game_tonight = False
@@ -73,11 +69,8 @@ class NhlLedMatrix:
     #         self.display_no_game()
 
 
-my_matrix = NhlLedMatrix(RGBMatrix)
-
-try:
-    print("Press CTRL-C to stop.")
-    while True:
-        time.sleep(100)
-except KeyboardInterrupt:
-    sys.exit(0)
+# Main function
+if __name__ == "__main__":
+    my_matrix = HockeyScoreboard()
+    if (not my_matrix.process()):
+        my_matrix.print_help()
