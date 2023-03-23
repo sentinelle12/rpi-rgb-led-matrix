@@ -29,7 +29,7 @@ class GameData:
         current_date = now.strftime('%Y-%m-%d')
         self.schedule_params = {'teamId': 8, 'date': current_date}
 
-        response = requests.get(f"{API_URL}{schedule_end_point}", params=self.schedule_params)
+        response = requests.get(API_URL + schedule_end_point, params=self.schedule_params)
         response.raise_for_status()
         data = response.json()
         print(data)
@@ -45,7 +45,7 @@ class GameData:
 
     def get_game_static_info(self):
 
-        response = requests.get(f"{API_URL}{self.game_link}")
+        response = requests.get(API_URL + self.game_link)
         response.raise_for_status()
         data = response.json()
 
@@ -58,7 +58,7 @@ class GameData:
         self.time_offset= data["gameData"]["teams"]["home"]["venue"]["timeZone"]["offset"]
 
         # CALCULATE GAME TIME WITH TIME OFFSET
-        self.adjusted_game_time = f"{str(int(self.game_time[0:2]) + int(self.time_offset))}:{self.game_time[-2:]}"
+        self.adjusted_game_time = str(int(self.game_time[0:2]) + int(self.time_offset)) + ':' + self.game_time[-2:]
 
         return {
             "abstract_game_state": self.abstract_game_state,
@@ -71,7 +71,7 @@ class GameData:
         }
 
     def get_live_data(self):
-        response = requests.get(f"{API_URL}{self.game_link}")
+        response = requests.get(API_URL + self.game_link)
         response.raise_for_status()
         data = response.json()
 

@@ -33,7 +33,6 @@ class HockeyScoreboard(SampleBase):
         # self.away_shots_text = object
         # self.powerplay_text = object
 
-        self.run()
 
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
@@ -44,7 +43,7 @@ class HockeyScoreboard(SampleBase):
         while True:
             offscreen_canvas.Clear()
             graphics.DrawText(offscreen_canvas, font1, 5, 10, blue, 'Mon panneau !')
-            offscreen_canvas = self.master.SwapOnVSync(offscreen_canvas)
+            offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
     # def update_game_info(self):
     #
