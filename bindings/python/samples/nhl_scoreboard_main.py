@@ -93,19 +93,15 @@ class HockeyScoreboard(SampleBase):
 
                 elif self.game_info["abstract_game_state"] == "Preview":
 
-                    graphics.DrawText(offscreen_canvas, font1, 5, 10, blue, "Preview")
-
+                    graphics.DrawText(offscreen_canvas, font1, 5, 32, blue, "Preview")
                     offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
-
                     time.sleep(30)
 
             else:
                 print("display no game")
 
-                graphics.DrawText(offscreen_canvas, font1, 5, 10, blue, "No game")
-
+                graphics.DrawText(offscreen_canvas, font1, 5, 32, blue, "No game")
                 offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
-
                 time.sleep(3600)
 
 
