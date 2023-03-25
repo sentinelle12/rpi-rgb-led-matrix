@@ -37,9 +37,24 @@ class HockeyScoreboard(SampleBase):
     def run(self):
 
         offscreen_canvas = self.matrix.CreateFrameCanvas()
+
+        # TEAM ABBR FONT
         font1 = graphics.Font()
-        font1.LoadFont("../../../fonts/7x13.bdf")
+        font1.LoadFont("../../../fonts/6x10.bdf")
+
+        # GOAL FONTS
+        font2 = graphics.Font()
+        font2.LoadFont("../../../fonts/7x14B.bdf")
+
+        # SHOTS/PERIOD/TIME REMAINING/DETAILED STATE FONT
+        font3 = graphics.Font()
+        font3.LoadFont("../../../fonts/5x8.bdf")
+
+
+
         blue = graphics.Color(0, 127, 255)
+        red = graphics.Color(175, 30, 45)
+        white = graphics.Color(255, 255, 255)
 
         while True:
 
@@ -57,9 +72,9 @@ class HockeyScoreboard(SampleBase):
                     print("game_live_data: {}".format(self.game_live_data))
 
                     graphics.DrawText(offscreen_canvas, font1, 32, 30, blue,
-                                      "Période: {}".format(self.game_live_data['current_period']))
-                    graphics.DrawText(offscreen_canvas, font1, 10, 30, blue, self.game_live_data['home_goals'])
-                    graphics.DrawText(offscreen_canvas, font1, 54, 30, blue, self.game_live_data['away_goals'])
+                                      str(self.game_live_data['current_period']))
+                    graphics.DrawText(offscreen_canvas, font1, 10, 30, blue, str(self.game_live_data['home_goals']))
+                    graphics.DrawText(offscreen_canvas, font1, 54, 30, blue, str(self.game_live_data['away_goals']))
                     graphics.DrawText(offscreen_canvas, font1, 32, 10, blue,
                                       "20:00")
                     graphics.DrawText(offscreen_canvas, font1, 10, 50, blue,
