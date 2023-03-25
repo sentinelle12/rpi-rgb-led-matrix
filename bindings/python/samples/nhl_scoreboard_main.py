@@ -44,11 +44,15 @@ class HockeyScoreboard(SampleBase):
 
         # GOAL FONTS
         font2 = graphics.Font()
-        font2.LoadFont("../../../fonts/7x14B.bdf")
+        font2.LoadFont("../../../fonts/9x15B.bdf")
 
         # SHOTS/PERIOD/TIME REMAINING/DETAILED STATE FONT
         font3 = graphics.Font()
         font3.LoadFont("../../../fonts/5x8.bdf")
+
+        # SMALLER FONT
+        font4 = graphics.Font()
+        font4.LoadFont("../../../fonts/4x7.bdf")
 
         blue = graphics.Color(0, 127, 255)
         red = graphics.Color(175, 30, 45)
@@ -69,19 +73,19 @@ class HockeyScoreboard(SampleBase):
                     self.game_live_data = self.game_data.get_live_data()
                     print("game_live_data: {}".format(self.game_live_data))
 
+                    graphics.DrawText(offscreen_canvas, font1, 10, 10, blue, str(self.game_info['home_team_abbr']))
+                    graphics.DrawText(offscreen_canvas, font1, 54, 10, blue, str(self.game_info['away_team_abbr']))
+
                     graphics.DrawText(offscreen_canvas, font3, 32, 10, white, self.game_live_data['current_time_remaining'])
 
-                    graphics.DrawText(offscreen_canvas, font1, 10, 10, blue, str(self.game_live_data['home_team_abbr']))
-                    graphics.DrawText(offscreen_canvas, font1, 54, 10, blue, str(self.game_live_data['away_team_abbr']))
+                    graphics.DrawText(offscreen_canvas, font2, 10, 40, white, str(self.game_live_data['home_goals']))
+                    graphics.DrawText(offscreen_canvas, font2, 54, 40, white, str(self.game_live_data['away_goals']))
 
-                    graphics.DrawText(offscreen_canvas, font2, 10, 30, white, str(self.game_live_data['home_goals']))
-                    graphics.DrawText(offscreen_canvas, font1, 32, 30, blue, str(self.game_live_data['current_period']))
-                    graphics.DrawText(offscreen_canvas, font2, 54, 30, white, str(self.game_live_data['away_goals']))
+                    graphics.DrawText(offscreen_canvas, font3, 32, 20, blue, str(self.game_live_data['current_period']))
 
-                    graphics.DrawText(offscreen_canvas, font3, 10, 50, red, str(self.game_live_data['home_shots_on_goal']))
-                    graphics.DrawText(offscreen_canvas, font3, 54, 50, red, str(self.game_live_data['away_shots_on_goal']))
-
-                    graphics.DrawText(offscreen_canvas, font3, 32, 50, blue, self.game_live_data['detailed_state'])
+                    graphics.DrawText(offscreen_canvas, font4, 54, 50, red, "Tirs:")
+                    graphics.DrawText(offscreen_canvas, font4, 10, 56, blue, str(self.game_live_data['home_shots_on_goal']))
+                    graphics.DrawText(offscreen_canvas, font4, 54, 56, blue, str(self.game_live_data['away_shots_on_goal']))
 
                     offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
