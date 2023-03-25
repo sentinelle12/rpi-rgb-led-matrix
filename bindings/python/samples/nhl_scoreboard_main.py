@@ -7,6 +7,7 @@ from PIL import Image
 import time
 import sys
 
+images_path = "./nhl_logos/"
 
 class HockeyScoreboard(SampleBase):
     def __init__(self, *args, **kwargs):
@@ -32,7 +33,6 @@ class HockeyScoreboard(SampleBase):
         # self.away_logo = object
         # self.soiree_hockey_img = object
         # self.soiree_hockey_logo = object
-
 
     def run(self):
 
@@ -69,9 +69,18 @@ class HockeyScoreboard(SampleBase):
                 self.game_info = self.game_data.get_game_static_info()
                 print("game_info = {}".format(self.game_info))
 
+                home_logo = Image.open('images_path{}r.png'.format(game_info['home_team_abbr']))
+                away_logo = Image.open('images_path{}r.png'.format(game_info['away_team_abbr']))
+
                 if self.game_info["abstract_game_state"] == "Live" or self.game_info["abstract_game_state"] == "Final":
                     self.game_live_data = self.game_data.get_live_data()
                     print("game_live_data: {}".format(self.game_live_data))
+
+                    home_logo.thumbnail((self.matrix.width / 2.2, self.matrix.height / 2.2), Image.ANTIALIAS)
+                    away_logo.thumbnail((self.matrix.width / 2.2, self.matrix.height / 2.2), Image.ANTIALIAS)
+
+                    self.matrix.SetImage(home_logo.convert('RGB'), 1, 1)
+                    self.matrix.SetImage(away_logo.convert('RGB'), 1 + home_logo.width + 4, 1)
 
                     graphics.DrawText(offscreen_canvas, font1, 5, 10, blue, str(self.game_info['home_team_abbr']))
                     graphics.DrawText(offscreen_canvas, font1, 42, 10, blue, str(self.game_info['away_team_abbr']))
