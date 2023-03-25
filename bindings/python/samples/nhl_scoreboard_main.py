@@ -74,16 +74,16 @@ class HockeyScoreboard(SampleBase):
                     print("game_live_data: {}".format(self.game_live_data))
 
                     graphics.DrawText(offscreen_canvas, font1, 5, 10, blue, str(self.game_info['home_team_abbr']))
-                    graphics.DrawText(offscreen_canvas, font1, 37, 10, blue, str(self.game_info['away_team_abbr']))
+                    graphics.DrawText(offscreen_canvas, font1, 42, 10, blue, str(self.game_info['away_team_abbr']))
 
-                    graphics.DrawText(offscreen_canvas, font3, 32, 20, white, self.game_live_data['current_time_remaining'])
+                    graphics.DrawText(offscreen_canvas, font3, 20, 20, white, self.game_live_data['current_time_remaining'])
 
                     graphics.DrawText(offscreen_canvas, font2, 10, 40, white, str(self.game_live_data['home_goals']))
-                    graphics.DrawText(offscreen_canvas, font2, 54, 40, white, str(self.game_live_data['away_goals']))
+                    graphics.DrawText(offscreen_canvas, font2, 49, 40, white, str(self.game_live_data['away_goals']))
 
-                    graphics.DrawText(offscreen_canvas, font3, 32, 40, blue, str(self.game_live_data['current_period']))
+                    graphics.DrawText(offscreen_canvas, font3, 32, 37, blue, str(self.game_live_data['current_period']))
 
-                    graphics.DrawText(offscreen_canvas, font4, 32, 56, red, "Tirs")
+                    graphics.DrawText(offscreen_canvas, font4, 27, 56, red, "Tirs")
                     graphics.DrawText(offscreen_canvas, font4, 10, 56, red, str(self.game_live_data['home_shots_on_goal']))
                     graphics.DrawText(offscreen_canvas, font4, 54, 56, red, str(self.game_live_data['away_shots_on_goal']))
 
