@@ -27,7 +27,7 @@ class GameData:
 
         now = datetime.now()
         current_date = now.strftime('%Y-%m-%d')
-        self.schedule_params = {'teamId': 8, 'date': current_date}
+        self.schedule_params = {'teamId': 8, 'date': '2023-03-18'}
 
         response = requests.get(API_URL + schedule_end_point, params=self.schedule_params)
         response.raise_for_status()
