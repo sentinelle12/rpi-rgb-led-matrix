@@ -69,8 +69,8 @@ class HockeyScoreboard(SampleBase):
                 self.game_info = self.game_data.get_game_static_info()
                 print("game_info = {}".format(self.game_info))
 
-                home_logo = Image.open('images_path{}r.png'.format(game_info['home_team_abbr']))
-                away_logo = Image.open('images_path{}r.png'.format(game_info['away_team_abbr']))
+                home_logo = Image.open('{}{}r.png'.format(images_path, self.game_info['home_team_abbr']))
+                away_logo = Image.open('{}{}r.png'.format(images_path, self.game_info['away_team_abbr']))
 
                 if self.game_info["abstract_game_state"] == "Live" or self.game_info["abstract_game_state"] == "Final":
                     self.game_live_data = self.game_data.get_live_data()
