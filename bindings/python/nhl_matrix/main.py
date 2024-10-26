@@ -2,7 +2,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from data_manager import GameData
 
-FONT_NAME = "Calibri"
+FONT_NAME = "Arial"
 
 
 def process_logo(filename):
@@ -79,32 +79,33 @@ class nhl_App:
 
     def display_preview_screen(self):
 
-        self.canvas.update()
+        self.canvas.delete('all')
         process_logo(f"./nhl_logos/{self.game_info['home_team_abbr']}.png")
-        home_logo = resize_logo(f"./nhl_logos/{self.game_info['home_team_abbr']}r.png", 3)
+        home_logo = resize_logo(f"./nhl_logos/{self.game_info['home_team_abbr']}r.png", 5)
         process_logo(f"./nhl_logos/{self.game_info['away_team_abbr']}.png")
-        away_logo = resize_logo(f"./nhl_logos/{self.game_info['away_team_abbr']}r.png", 3)
+        away_logo = resize_logo(f"./nhl_logos/{self.game_info['away_team_abbr']}r.png", 5)
         self.home_img = ImageTk.PhotoImage(home_logo)
         self.away_img = ImageTk.PhotoImage(away_logo)
 
-        self.home_logo = self.canvas.create_image(120, 320, image=self.home_img)
-        self.away_logo = self.canvas.create_image(520, 320, image=self.away_img)
+        self.home_logo = self.canvas.create_image(80, 320, image=self.home_img)
+        self.away_logo = self.canvas.create_image(560, 320, image=self.away_img)
         self.invite_text = self.canvas.create_text(320, 50, text='Ce soir', fill='white',
                                                    font=(FONT_NAME, 54, 'normal'))
         self.vs_text = self.canvas.create_text(320, 320, text='VS', fill='white', font=(FONT_NAME, 72, 'bold'))
-        self.game_time = self.canvas.create_text(320, 550, text=f"{game_info['adjusted_game_time']}", fill="white",
+        self.game_time = self.canvas.create_text(320, 550, text=f"{self.game_info['adjusted_game_time']}", fill="white",
                                                  font=(FONT_NAME, 54, 'normal'))
         self.canvas.pack()
-        self.master.after(300000, self.update_game_info)
+        self.canvas.update()
+        self.master.after(60000, self.update_game_info)
 
     def display_gamelive_screen(self):
 
-        self.canvas.update()
+        self.canvas.delete('all')
 
         process_logo(f"./nhl_logos/{self.game_info['home_team_abbr']}.png")
-        home_logo = resize_logo(f"./nhl_logos/{self.game_info['home_team_abbr']}r.png", 3)
+        home_logo = resize_logo(f"./nhl_logos/{self.game_info['home_team_abbr']}r.png", 4)
         process_logo(f"./nhl_logos/{self.game_info['away_team_abbr']}.png")
-        away_logo = resize_logo(f"./nhl_logos/{self.game_info['away_team_abbr']}r.png", 3)
+        away_logo = resize_logo(f"./nhl_logos/{self.game_info['away_team_abbr']}r.png", 4)
         self.home_img = ImageTk.PhotoImage(home_logo)
         self.away_img = ImageTk.PhotoImage(away_logo)
 
@@ -115,20 +116,21 @@ class nhl_App:
                                                    fill="white", font=(FONT_NAME, 16, "normal"))
         self.home_goals_text = self.canvas.create_text(120, 370, text=self.game_live_data['home_goals'], fill="white", font=(FONT_NAME, 128, "bold"))
         self.away_goals_text = self.canvas.create_text(520, 370, text=self.game_live_data['away_goals'], fill="white", font=(FONT_NAME, 128, "bold"))
-        self.time_remaining_text = self.canvas.create_text(320, 370, text="20:00", fill="white",
+        self.time_remaining_text = self.canvas.create_text(320, 370, text=self.game_live_data["current_time_remaining"], fill="white",
                                                            font=(FONT_NAME, 32, "normal"))
         self.home_shots_text = self.canvas.create_text(120, 490, text=f"Tirs: {self.game_live_data['home_shots_on_goal']}", fill="white",
                                                        font=(FONT_NAME, 16, "normal"))
         self.away_shots_text = self.canvas.create_text(520, 490, text=f"Tirs: {self.game_live_data['away_shots_on_goal']}", fill="white",
                                                        font=(FONT_NAME, 16, "normal"))
-        self.detailed_state_text = self.canvas.create_text(320, 550, text=self.game_live_data['detailed_state'], fill="light blue",
-                                                      font=(FONT_NAME, 16, "normal"))
+        # self.detailed_state_text = self.canvas.create_text(320, 550, text=self.game_live_data['detailed_state'], fill="light blue",
+        #                                               font=(FONT_NAME, 16, "normal"))
         self.canvas.pack()
+        self.canvas.update()
         self.master.after(30000, self.update_game_info)
 
 
     def display_no_game(self):
-        self.canvas.update()
+        self.canvas.delete('all')
         self.soiree_hockey_img = resize_logo(f"./nhl_logos/soiree_hockey.png", 4)
         self.soiree_hockey_img = ImageTk.PhotoImage(self.soiree_hockey_img)
         self.soiree_hockey_logo = self.canvas.create_image(320, 320, image=self.soiree_hockey_img)
@@ -136,6 +138,7 @@ class nhl_App:
                                                     fill='white',
                                                     font=(FONT_NAME, 24, 'bold'))
         self.canvas.pack()
+        self.canvas.update()
         self.master.after(3600000, self.update_game_info)
 
 
