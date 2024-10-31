@@ -1,21 +1,32 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 from data_manager import GameData
+import cairosvg
+import requests
 
 FONT_NAME = "Arial"
 
-
-def process_logo(filename):
-    img = Image.open(filename)
-    rgba = img.convert("RGBA")
-    datas = rgba.getdata()
-    new_data = []
-    for item in datas:
-        new_data.append((item[0], item[1], item[2], 32))
-    rgba.putdata(new_data)
-    new_filename = f"./nhl_logos/{filename[12:15]}r.png"
-    print(f"new_filename : {new_filename}")
-    rgba.save(new_filename, "PNG")
+# def process_logo(filename):
+#
+#     # Load SVG data in a variable
+#     response = requests.get(filename)
+#     response.raise_for_status()
+#     svg_data = response.text()
+#     # Convert SVG data to PNG format using cairosvg for usage by PIL
+#     filelike_obj = io.BytesIO(cairosvg.svg2png(svg_data))
+#
+#     # Open the image using PIL
+#     img = Image.open(filelike_obj)
+#
+#     rgba = img.convert("RGBA")
+#     datas = rgba.getdata()
+#     new_data = []
+#     for item in datas:
+#         new_data.append((item[0], item[1], item[2], 32))
+#     rgba.putdata(new_data)
+#     new_filename = f"./nhl_logos/{filename[12:15]}r.png"
+#     print(f"new_filename : {new_filename}")
+#     rgba.save(new_filename, "PNG")
 
 
 def resize_logo(filename, ratio):
@@ -102,9 +113,9 @@ class nhl_App:
 
         self.canvas.delete('all')
 
-        process_logo(f"./nhl_logos/{self.game_info['home_team_abbr']}.png")
+        # process_logo(f"./nhl_logos/{self.game_info['home_team_abbr']}.png")
         home_logo = resize_logo(f"./nhl_logos/{self.game_info['home_team_abbr']}r.png", 4)
-        process_logo(f"./nhl_logos/{self.game_info['away_team_abbr']}.png")
+        # process_logo(f"./nhl_logos/{self.game_info['away_team_abbr']}.png")
         away_logo = resize_logo(f"./nhl_logos/{self.game_info['away_team_abbr']}r.png", 4)
         self.home_img = ImageTk.PhotoImage(home_logo)
         self.away_img = ImageTk.PhotoImage(away_logo)
