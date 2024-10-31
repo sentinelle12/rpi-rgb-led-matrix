@@ -30,6 +30,8 @@ class GameData:
         self.current_time_remaining = ""
         self.abstract_game_state = ""
         self.adjusted_game_time = ""
+        self.home_logo_link = ""
+        self.away_logo_link = ""
 
     def game_tonight(self):
 
@@ -45,6 +47,8 @@ class GameData:
             tonight_game_index = game_dates.index(current_date)
             self.game_time = data['games'][tonight_game_index]['startTimeUTC'][11:16]
             self.game_id = data['games'][tonight_game_index]['id']
+            self.home_logo_link = data['games'][tonight_game_index]['home']['logo']
+            self.away_logo_link = data['games'][tonight_game_index]['away']['logo']
             return True
 
         except IndexError:
